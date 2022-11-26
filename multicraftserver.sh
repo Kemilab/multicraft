@@ -64,11 +64,11 @@ echo "Daemon number: ${DAEMONNUM}"
 echo "Minecraft key: ${KEY}"
 echo;read -n 1 -s -r -p "Hit [ENTER] to continue or CTRL=c to cancel"
  
-apt-get update -y&&apt-get install -y vim software-properties-common apache2 phpmyadmin mysql-server php libapache2-mod-php php-mcrypt php-mysql zip default-jre -y&&service mysql restart
+sudo apt-get update -y&&apt-get install -y vim software-properties-common apache2 phpmyadmin mysql-server php libapache2-mod-php php-mcrypt php-mysql zip default-jre -y&&service mysql restart
 
 echo "ServerName ${DOMAIN}" >> /etc/apache2/apache2.conf&&service apache2 restart
 
-apt-get install -y dialog expect
+sudo apt-get install -y dialog expect
 
 SECURE_MYSQL=$(expect -c "
 set timeout 10
@@ -97,9 +97,9 @@ echo "$SECURE_MYSQL"
 
 sed -i 's/.*irectoryIndex.*/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/' /etc/apache2/mods-enabled/dir.conf
 
-service apache2 restart
+sudo service apache2 restart
 
-add-apt-repository -y ppa:certbot/certbot&&apt-get update&&apt-get install python-certbot-apache -y
+sudo add-apt-repository -y ppa:certbot/certbot&&apt-get update&&apt-get install python-certbot-apache -y
 
 CERTBOT=$(expect -c "
 set timeout 10
@@ -126,9 +126,9 @@ expect eof
 ")
 echo "$CERTBOT"
 
-service mysql start
-mkdir -p /run/dbus
-dbus-daemon --system
+sudo service mysql start
+sudo mkdir -p /run/dbus
+sudo dbus-daemon --system
 
 mysql -uroot -p${PW} -e "CREATE DATABASE ${PANELDB} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
 mysql -uroot -p${PW} -e "CREATE USER ${PANELDB}@localhost IDENTIFIED BY '${PPASSWDDB}';"
@@ -142,7 +142,7 @@ mysql -uroot -p${PW} -e "FLUSH PRIVILEGES;"
 
 cd ~&&mkdir MulticraftInstllation;cd MulticraftInstllation
 
-wget https://www.multicraft.org/download/linux64 -O multicraft.tar.gz&&tar xvzf multicraft.tar.gz
+sudo wget https://www.multicraft.org/download/linux64 -O multicraft.tar.gz&&tar xvzf multicraft.tar.gz
 
 cd multicraft
 
