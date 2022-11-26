@@ -2,7 +2,7 @@
 
 From root or sudo on Ubuntu 16.04, run:
 
-curl https://raw.githubusercontent.com/se7enack/multicraft/master/multicraftserver.sh > multicraftserver.sh&&bash ./multicraftserver.sh
+curl https://github.com/Kemilab/multicraft/blob/f71f682fcaa2fecc47c540165fa3096ec28dd34c/multicraftserver.sh > multicraftserver.sh&&bash ./multicraftserver.sh
 
 
 Walkthrough video:
